@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Kontak - SMA Negeri 1 Jember</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <header>
+        <div class="logo-container">
+            <img src="images1.png" alt="Logo SMAN 1 Jember" class="logo">
+            <h1>SMA Negeri 1 Jember</h1>
+        </div>
+        <nav>
+            <ul>
+                <li><a href="index.html">Home</a></li>
+                <li><a href="jurusan.html">Jurusan</a></li>
+                <li><a href="kontak.html">Kontak</a></li>
+            </ul>
+        </nav>
+    </header>
+
+    <section class="content">
+        <h2>Hubungi Kami</h2>
+        <p>Silakan isi formulir di bawah ini untuk mengirimkan pesan, pertanyaan, atau masukan kepada pihak SMAN 1 Jember.</p>
+
+        <!-- Form menggunakan <form>, <input type="text">, <input type="email">, <textarea>, <button> -->
+        <form action="#" method="POST" class="form-kontak">
+            <div class="form-group">
+                <label for="nama">Nama Lengkap:</label>
+                <input type="text" id="nama" name="nama" placeholder="Masukkan nama Anda" required>
+            </div>
+            
+            <div class="form-group">
+                <label for="email">Alamat Email:</label>
+                <input type="email" id="email" name="email" placeholder="contoh@email.com" required>
+            </div>
+            
+            <div class="form-group">
+                <label for="pesan">Pesan:</label>
+                <textarea id="pesan" name="pesan" rows="6" placeholder="Tuliskan pesan Anda di sini..." required></textarea>
+            </div>
+            
+            <button type="submit" class="btn-submit">Kirim Pesan</button>
+        </form>
+    </section>
+
+    <footer>
+        <p>&copy; 2026 SMA Negeri 1 Jember. All rights reserved.</p>
+    </footer>
+</body>
+</html>

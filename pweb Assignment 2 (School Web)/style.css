@@ -1,0 +1,166 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+}
+
+body {
+    background-color: #f4f6f9;
+    color: #333;
+    display: flex;
+    flex-direction: column;
+    min-height: 100vh;
+}
+
+header {
+    background-color: #1e3a8a; /* Warna biru sekolahan */
+    color: white;
+    padding: 20px 50px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+}
+
+.logo-container {
+    display: flex;
+    align-items: center;
+}
+
+.logo {
+    height: 55px;
+    margin-right: 15px;
+}
+
+nav ul {
+    list-style: none;
+    display: flex;
+}
+
+nav ul li {
+    margin-left: 25px;
+}
+
+nav ul li a {
+    color: white;
+    text-decoration: none;
+    font-weight: 600;
+    transition: 0.3s;
+}
+
+nav ul li a:hover {
+    color: #fbbf24;
+}
+
+.content {
+    background: white;
+    padding: 40px;
+    margin: 30px 50px;
+    border-radius: 8px;
+    box-shadow: 0 4px 6px rgba(0,0,0,0.05);
+    flex: 1;
+}
+
+.content h2 {
+    color: #1e3a8a;
+    margin-bottom: 15px;
+    margin-top: 20px;
+    border-bottom: 2px solid #e5e7eb;
+    padding-bottom: 10px;
+}
+
+.content h3 {
+    margin-top: 15px;
+    margin-bottom: 10px;
+    color: #374151;
+}
+
+.content p {
+    line-height: 1.7;
+    margin-bottom: 15px;
+}
+
+.content ul, .content ol {
+    margin-left: 25px;
+    line-height: 1.7;
+}
+
+/* Desain Tabel */
+.tabel-jurusan {
+    width: 100%;
+    border-collapse: collapse;
+    margin-top: 20px;
+}
+
+.tabel-jurusan th {
+    background-color: #1e3a8a;
+    color: white;
+    text-align: left;
+}
+
+.tabel-jurusan th, .tabel-jurusan td {
+    border: 1px solid #d1d5db;
+    padding: 12px 15px;
+}
+
+.tabel-jurusan tr:nth-child(even) {
+    background-color: #f9fafb;
+}
+
+/* Desain Form */
+.form-kontak {
+    display: flex;
+    flex-direction: column;
+    max-width: 600px;
+}
+
+.form-group {
+    margin-bottom: 20px;
+    display: flex;
+    flex-direction: column;
+}
+
+.form-group label {
+    margin-bottom: 8px;
+    font-weight: 600;
+}
+
+.form-group input, .form-group textarea {
+    padding: 12px;
+    border: 1px solid #d1d5db;
+    border-radius: 6px;
+    font-size: 15px;
+    transition: border-color 0.3s;
+}
+
+.form-group input:focus, .form-group textarea:focus {
+    outline: none;
+    border-color: #1e3a8a;
+}
+
+.btn-submit {
+    background-color: #1e3a8a;
+    color: white;
+    padding: 12px 20px;
+    border: none;
+    border-radius: 6px;
+    cursor: pointer;
+    font-size: 16px;
+    font-weight: 600;
+    margin-top: 10px;
+    transition: 0.3s;
+}
+
+.btn-submit:hover {
+    background-color: #1e40af;
+}
+
+footer {
+    background-color: #1e3a8a;
+    color: white;
+    text-align: center;
+    padding: 20px;
+    margin-top: auto;
+    font-size: 14px;
+}

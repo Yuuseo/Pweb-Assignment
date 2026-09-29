@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Kontak - SMAN 1 Jember</title>
+    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+</head>
+<body>
+
+    <!-- Header & Navigasi -->
+    <header>
+        <div class="logo-container">
+            <img src="asset_img/logo_sma.png" alt="Logo SMAN 1 Jember">
+            <h2>SMAN 1 JEMBER</h2>
+        </div>
+        <nav>
+            <a href="index.html">Beranda</a>
+            <a href="jurusan.html">Jurusan</a>
+            <a href="fasilitas.html">Fasilitas</a>
+            <a href="prestasi.html">Prestasi</a>
+            <a href="pendaftaran.html">Pendaftaran</a>
+            <a href="kontak.html" class="active">Kontak</a>
+        </nav>
+    </header>
+
+    <div class="container">
+        <h2 class="section-title">HUBUNGI KAMI</h2>
+        <p style="text-align: center; margin-bottom: 35px; color: #666;">
+            Ada pertanyaan seputar SMAN 1 Jember? Silakan kirimkan pesan Anda melalui formulir di bawah ini.
+        </p>
+
+        <div class="form-wrapper">
+            <div class="form-box">
+                <h3>Tinggalkan Pesan</h3>
+                <form action="#" method="POST">
+                    <div class="form-group">
+                        <label for="nama_lengkap">Nama Lengkap *</label>
+                        <input type="text" id="nama_lengkap" placeholder="Masukkan nama lengkap Anda" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="email_pesan">Email *</label>
+                        <input type="email" id="email_pesan" placeholder="nama@email.com" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="isi_pesan">Pesan / Pertanyaan *</label>
+                        <textarea id="isi_pesan" rows="5" placeholder="Tuliskan pertanyaan atau pesan Anda di sini..." required></textarea>
+                    </div>
+                    <button type="submit" class="btn-submit btn-dark">Kirim Pesan</button>
+                </form>
+            </div>
+        </div>
+    </div>
+
+    <!-- Footer -->
+    <footer>
+        <div class="footer-info">
+            <div style="display:flex; align-items:center; gap:10px; margin-bottom:15px;">
+                <img src="asset_img/logo_sma.png" alt="Logo" style="height:30px;">
+                <h3 style="margin:0;">SMA NEGERI 1 JEMBER</h3>
+            </div>
+            <p>Jl. Letjen Panjaitan No. 55 Kec. Sumbersari, Kab. Jember 68121</p>
+            <p>(0331) - 338586</p>
+            <p><a href="https://sman1jember.sch.id/" target="_blank">sman1jember.sch.id</a></p>
+            
+            <div class="social-icons" style="margin-top: 15px;">
+                <a href="https://instagram.com" target="_blank"><i class="fab fa-instagram"></i></a>
+                <a href="https://tiktok.com" target="_blank"><i class="fab fa-tiktok"></i></a>
+                <a href="https://youtube.com" target="_blank"><i class="fab fa-youtube"></i></a>
+                <a href="https://wa.me/628123456789" target="_blank"><i class="fab fa-whatsapp"></i></a>
+            </div>
+            <p style="margin-top:20px; font-size:12px;">Copyright &copy; 2026 SMAN 1 Jember. All rights reserved.</p>
+        </div>
+        <div>
+            <img src="asset_img/mapsma1.png" alt="Peta Lokasi" class="footer-map">
+        </div>
+    </footer>
+
+</body>
+</html>

@@ -1,0 +1,299 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Student Management - Formulir</title>
+    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+</head>
+<body>
+
+    <!-- Header / Navbar -->
+    <header class="navbar">
+        <div class="nav-brand">
+            <i class="fa-solid fa-graduation-cap"></i>
+            <h1>Student <span>Management</span></h1>
+        </div>
+        <nav class="nav-links">
+            <a href="index.html" class="active"><i class="fa-solid fa-file-lines"></i> Formulir</a>
+            <a href="datasiswa.html"><i class="fa-solid fa-users"></i> Data Mahasiswa</a>
+            <a href="#"><i class="fa-solid fa-circle-info"></i> About</a>
+        </nav>
+        <div class="nav-profile">
+            <i class="fa-solid fa-circle-user"></i>
+        </div>
+    </header>
+
+    <!-- Kontainer Layout 2 Kolom -->
+    <main class="container">
+        
+        <!-- Kolom Kiri: Formulir (Mode Tambah / Edit) -->
+        <section class="card form-section">
+            <div class="card-header">
+                <h2 id="formTitle"><i class="fa-solid fa-user-plus"></i> Tambah Data Mahasiswa</h2>
+            </div>
+            <form id="studentForm" class="student-form">
+                <div class="form-group">
+                    <label for="nrp">NRP</label>
+                    <input type="text" id="nrp" placeholder="Contoh: 5025251014" required>
+                </div>
+
+                <div class="form-group">
+                    <label for="nama">Nama Lengkap</label>
+                    <input type="text" id="nama" placeholder="Masukkan nama lengkap" required>
+                </div>
+
+                <div class="form-group">
+                    <label for="email">Email</label>
+                    <input type="email" id="email" placeholder="5025251xxx@student.its.ac.id" required>
+                </div>
+
+                <div class="form-group">
+                    <label for="prodi">Program Studi</label>
+                    <select id="prodi" required>
+                        <option value="" disabled selected>-- Pilih Program Studi --</option>
+                        <option value="Teknik Informatika">Teknik Informatika</option>
+                        <option value="Rekayasa Kecerdasan Artifisial">Rekayasa Kecerdasan Artifisial</option>
+                        <option value="Rekayasa Perangkat Lunak">Rekayasa Perangkat Lunak</option>
+                    </select>
+                </div>
+
+                <div class="form-group">
+                    <label for="status">Status Akademik</label>
+                    <select id="status" required>
+                        <option value="Aktif" selected>Aktif</option>
+                        <option value="Lulus">Lulus</option>
+                        <option value="Cuti">Cuti</option>
+                    </select>
+                </div>
+
+                <div class="form-actions">
+                    <button type="submit" id="btnSubmit" class="btn btn-save">
+                        <i class="fa-solid fa-floppy-disk"></i> Simpan Data
+                    </button>
+                    <button type="button" id="btnCancel" class="btn btn-cancel" onclick="resetForm()">
+                        <i class="fa-solid fa-rotate-left"></i> Batal
+                    </button>
+                </div>
+            </form>
+        </section>
+
+        <!-- Kolom Kanan: Tabel Data Mahasiswa -->
+        <section class="card data-section">
+            <div class="card-header data-header">
+                <h2>
+                    <i class="fa-solid fa-list-ul"></i> Daftar Mahasiswa 
+                    <span class="badge-total" id="totalBadge">Total: 0</span>
+                </h2>
+            </div>
+
+            <!-- Filter & Pencarian -->
+            <div class="filter-controls">
+                <select id="filterProdi" class="filter-select" onchange="renderTable()">
+                    <option value="Semua" selected>Semua Prodi</option>
+                    <option value="Teknik Informatika">Teknik Informatika</option>
+                    <option value="Rekayasa Kecerdasan Artifisial">Rekayasa Kecerdasan Artifisial</option>
+                    <option value="Rekayasa Perangkat Lunak">Rekayasa Perangkat Lunak</option>
+                </select>
+                
+                <div class="search-box">
+                    <input type="text" id="searchInput" placeholder="Cari Nama / NRP..." onkeyup="renderTable()">
+                    <button type="button" class="btn-search">
+                        <i class="fa-solid fa-magnifying-glass"></i>
+                    </button>
+                </div>
+            </div>
+
+            <!-- Tabel Data -->
+            <div class="table-responsive">
+                <table>
+                    <thead>
+                        <tr>
+                            <th>NRP</th>
+                            <th>NAMA</th>
+                            <th>EMAIL</th>
+                            <th>PRODI</th>
+                            <th>STATUS</th>
+                            <th>AKSI</th>
+                        </tr>
+                    </thead>
+                    <tbody id="studentTableBody">
+                        <!-- Data diisi oleh JavaScript -->
+                    </tbody>
+                </table>
+            </div>
+
+            <!-- Navigasi Halaman / Pagination Dinamis -->
+            <div class="pagination" id="paginationControls">
+                <!-- Tombol angka dan panah dibuat otomatis oleh JavaScript -->
+            </div>
+        </section>
+
+    </main>
+
+    <!-- Script JavaScript Internal -->
+    <script>
+        let dataMahasiswa = [
+            { nrp: "5025251014", nama: "Ahmad Fauzi", email: "5025251014@student.its.ac.id", prodi: "Teknik Informatika", status: "Aktif" },
+            { nrp: "5025251048", nama: "Nabila Putri", email: "5025251048@student.its.ac.id", prodi: "Rekayasa Kecerdasan Artifisial", status: "Lulus" },
+            { nrp: "5025251092", nama: "Dion Ramadhan", email: "5025251092@student.its.ac.id", prodi: "Rekayasa Perangkat Lunak", status: "Cuti" },
+            { nrp: "5025251105", nama: "Siti Rahma", email: "5025251105@student.its.ac.id", prodi: "Teknik Informatika", status: "Aktif" },
+            { nrp: "5025251120", nama: "Budi Santoso", email: "5025251120@student.its.ac.id", prodi: "Rekayasa Perangkat Lunak", status: "Aktif" }
+        ];
+
+        let editingIndex = -1; 
+        let currentPage = 1;
+        const rowsPerPage = 2; // Jumlah baris yang muncul per halaman
+
+        function renderTable() {
+            const tableBody = document.getElementById("studentTableBody");
+            const filterProdi = document.getElementById("filterProdi").value;
+            const searchInput = document.getElementById("searchInput").value.toLowerCase();
+            
+            tableBody.innerHTML = "";
+
+            // Filter data berdasarkan Prodi dan Pencarian
+            let filteredData = dataMahasiswa.filter(item => {
+                const matchProdi = (filterProdi === "Semua" || item.prodi === filterProdi);
+                const matchSearch = item.nama.toLowerCase().includes(searchInput) || item.nrp.includes(searchInput);
+                return matchProdi && matchSearch;
+            });
+
+            document.getElementById("totalBadge").innerText = `Total: ${filteredData.length}`;
+
+            // Hitung total halaman
+            const totalPages = Math.ceil(filteredData.length / rowsPerPage) || 1;
+            if (currentPage > totalPages) currentPage = totalPages;
+
+            // Potong data sesuai halaman aktif (Pagination)
+            const startIndex = (currentPage - 1) * rowsPerPage;
+            const paginatedData = filteredData.slice(startIndex, startIndex + rowsPerPage);
+
+            // Render baris tabel
+            paginatedData.forEach((item) => {
+                const originalIndex = dataMahasiswa.indexOf(item);
+                let statusClass = "status-aktif";
+                if (item.status === "Lulus") statusClass = "status-lulus";
+                if (item.status === "Cuti") statusClass = "status-cuti";
+
+                const row = document.createElement("tr");
+                row.innerHTML = `
+                    <td class="bold-text">${item.nrp}</td>
+                    <td>${item.nama}</td>
+                    <td>${item.email}</td>
+                    <td>${item.prodi}</td>
+                    <td><span class="status ${statusClass}">${item.status}</span></td>
+                    <td class="action-buttons">
+                        <button class="btn-action btn-edit" title="Edit" onclick="editData(${originalIndex})">
+                            <i class="fa-solid fa-pen-to-square"></i>
+                        </button>
+                        <button class="btn-action btn-delete" title="Hapus" onclick="deleteData(${originalIndex})">
+                            <i class="fa-solid fa-trash"></i>
+                        </button>
+                    </td>
+                `;
+                tableBody.appendChild(row);
+            });
+
+            // Render tombol navigasi halaman
+            renderPagination(totalPages);
+        }
+
+        function renderPagination(totalPages) {
+            const paginationContainer = document.getElementById("paginationControls");
+            paginationContainer.innerHTML = "";
+
+            // Tombol Previous (<)
+            const prevBtn = document.createElement("a");
+            prevBtn.href = "#";
+            prevBtn.className = "page-nav";
+            prevBtn.innerHTML = '<i class="fa-solid fa-chevron-left"></i>';
+            prevBtn.onclick = (e) => {
+                e.preventDefault();
+                if (currentPage > 1) {
+                    currentPage--;
+                    renderTable();
+                }
+            };
+            paginationContainer.appendChild(prevBtn);
+
+            // Tombol Angka Halaman (1, 2, dst)
+            for (let i = 1; i <= totalPages; i++) {
+                const pageBtn = document.createElement("a");
+                pageBtn.href = "#";
+                pageBtn.className = `page-num ${i === currentPage ? "active" : ""}`;
+                pageBtn.innerText = i;
+                pageBtn.onclick = (e) => {
+                    e.preventDefault();
+                    currentPage = i;
+                    renderTable();
+                };
+                paginationContainer.appendChild(pageBtn);
+            }
+
+            // Tombol Next (>)
+            const nextBtn = document.createElement("a");
+            nextBtn.href = "#";
+            nextBtn.className = "page-nav";
+            nextBtn.innerHTML = '<i class="fa-solid fa-chevron-right"></i>';
+            nextBtn.onclick = (e) => {
+                e.preventDefault();
+                if (currentPage < totalPages) {
+                    currentPage++;
+                    renderTable();
+                }
+            };
+            paginationContainer.appendChild(nextBtn);
+        }
+
+        function editData(index) {
+            editingIndex = index;
+            const item = dataMahasiswa[index];
+
+            document.getElementById("nrp").value = item.nrp;
+            document.getElementById("nama").value = item.nama;
+            document.getElementById("email").value = item.email;
+            document.getElementById("prodi").value = item.prodi;
+            document.getElementById("status").value = item.status;
+
+            document.getElementById("formTitle").innerHTML = '<i class="fa-solid fa-user-pen"></i> Edit Data Mahasiswa';
+            document.getElementById("btnSubmit").innerHTML = '<i class="fa-solid fa-arrows-rotate"></i> Update Data';
+        }
+
+        function resetForm() {
+            editingIndex = -1;
+            document.getElementById("studentForm").reset();
+            document.getElementById("formTitle").innerHTML = '<i class="fa-solid fa-user-plus"></i> Tambah Data Mahasiswa';
+            document.getElementById("btnSubmit").innerHTML = '<i class="fa-solid fa-floppy-disk"></i> Simpan Data';
+        }
+
+        document.getElementById("studentForm").addEventListener("submit", function(e) {
+            e.preventDefault();
+            const nrp = document.getElementById("nrp").value;
+            const nama = document.getElementById("nama").value;
+            const email = document.getElementById("email").value;
+            const prodi = document.getElementById("prodi").value;
+            const status = document.getElementById("status").value;
+
+            if (editingIndex === -1) {
+                dataMahasiswa.push({ nrp, nama, email, prodi, status });
+            } else {
+                dataMahasiswa[editingIndex] = { nrp, nama, email, prodi, status };
+            }
+            renderTable();
+            resetForm();
+        });
+
+        function deleteData(index) {
+            if (confirm("Apakah Anda yakin ingin menghapus data mahasiswa ini?")) {
+                dataMahasiswa.splice(index, 1);
+                renderTable();
+                resetForm();
+            }
+        }
+
+        document.addEventListener("DOMContentLoaded", renderTable);
+    </script>
+</body>
+</html>

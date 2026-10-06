@@ -1,0 +1,172 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Student Management - Data Lengkap</title>
+    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+</head>
+<body>
+
+    <!-- Header / Navbar -->
+    <header class="navbar">
+        <div class="nav-brand">
+            <i class="fa-solid fa-graduation-cap"></i>
+            <h1>Student <span>Management</span></h1>
+        </div>
+        <nav class="nav-links">
+            <a href="index.html"><i class="fa-solid fa-file-lines"></i> Formulir</a>
+            <a href="datasiswa.html" class="active"><i class="fa-solid fa-users"></i> Data Mahasiswa</a>
+            <a href="#"><i class="fa-solid fa-circle-info"></i> About</a>
+        </nav>
+        <div class="nav-profile">
+            <i class="fa-solid fa-circle-user"></i>
+        </div>
+    </header>
+
+    <!-- Kontainer Penuh Halaman Data -->
+    <main class="container-full">
+        
+        <section class="card data-section">
+            <div class="card-header data-header">
+                <h2>
+                    <i class="fa-solid fa-list-ul"></i> Daftar Mahasiswa 
+                    <span class="badge-total">Total: 3</span>
+                </h2>
+            </div>
+
+            <!-- Filter & Pencarian -->
+            <div class="filter-controls">
+                <select class="filter-select">
+                    <option value="Semua" selected>Semua Prodi</option>
+                    <option value="Teknik Informatika">Teknik Informatika</option>
+                    <option value="Rekayasa Kecerdasan Artifisial">Rekayasa Kecerdasan Artifisial</option>
+                    <option value="Rekayasa Perangkat Lunak">Rekayasa Perangkat Lunak</option>
+                </select>
+                
+                <div class="search-box">
+                    <input type="text" placeholder="Cari Nama / NRP...">
+                    <button type="button" class="btn-search">
+                        <i class="fa-solid fa-magnifying-glass"></i>
+                    </button>
+                </div>
+            </div>
+
+            <!-- Tabel Data -->
+            <div class="table-responsive">
+                <table>
+                    <thead>
+                        <tr>
+                            <th>NRP</th>
+                            <th>NAMA</th>
+                            <th>EMAIL</th>
+                            <th>PRODI</th>
+                            <th>STATUS</th>
+                            <th>AKSI</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td class="bold-text">5025251014</td>
+                            <td>Ahmad Fauzi</td>
+                            <td>5025251014@student.its.ac.id</td>
+                            <td>Teknik Informatika</td>
+                            <td><span class="status status-aktif">Aktif</span></td>
+                            <td class="action-buttons">
+                                <a href="#editModal" class="btn-action btn-edit" title="Edit"><i class="fa-solid fa-pen-to-square"></i></a>
+                                <a href="#deleteModal" class="btn-action btn-delete" title="Hapus"><i class="fa-solid fa-trash"></i></a>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td class="bold-text">5025251048</td>
+                            <td>Nabila Putri</td>
+                            <td>5025251048@student.its.ac.id</td>
+                            <td>Rekayasa Kecerdasan Artifisial</td>
+                            <td><span class="status status-lulus">Lulus</span></td>
+                            <td class="action-buttons">
+                                <a href="#editModal" class="btn-action btn-edit" title="Edit"><i class="fa-solid fa-pen-to-square"></i></a>
+                                <a href="#deleteModal" class="btn-action btn-delete" title="Hapus"><i class="fa-solid fa-trash"></i></a>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td class="bold-text">5025251092</td>
+                            <td>Dion Ramadhan</td>
+                            <td>5025251092@student.its.ac.id</td>
+                            <td>Rekayasa Perangkat Lunak</td>
+                            <td><span class="status status-cuti">Cuti</span></td>
+                            <td class="action-buttons">
+                                <a href="#editModal" class="btn-action btn-edit" title="Edit"><i class="fa-solid fa-pen-to-square"></i></a>
+                                <a href="#deleteModal" class="btn-action btn-delete" title="Hapus"><i class="fa-solid fa-trash"></i></a>
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+
+            <!-- Navigasi Halaman -->
+            <div class="pagination">
+                <a href="#" class="page-nav"><i class="fa-solid fa-chevron-left"></i></a>
+                <a href="#" class="page-num active">1</a>
+                <a href="#" class="page-num">2</a>
+                <a href="#" class="page-nav"><i class="fa-solid fa-chevron-right"></i></a>
+            </div>
+        </section>
+
+    </main>
+
+    <!-- Modal Edit Data -->
+    <div id="editModal" class="modal-overlay">
+        <div class="modal-card">
+            <div class="modal-header">
+                <h3><i class="fa-solid fa-user-pen"></i> Edit Data Mahasiswa</h3>
+                <a href="#" class="close-modal"><i class="fa-solid fa-xmark"></i></a>
+            </div>
+            <form action="#" class="modal-form">
+                <div class="form-group">
+                    <label>Nama Lengkap</label>
+                    <input type="text" value="Ahmad Fauzi" required>
+                </div>
+                <div class="form-group">
+                    <label>Program Studi</label>
+                    <select>
+                        <option value="Teknik Informatika" selected>Teknik Informatika</option>
+                        <option value="Rekayasa Kecerdasan Artifisial">Rekayasa Kecerdasan Artifisial</option>
+                        <option value="Rekayasa Perangkat Lunak">Rekayasa Perangkat Lunak</option>
+                    </select>
+                </div>
+                <div class="form-group">
+                    <label>Status Akademik</label>
+                    <select>
+                        <option value="Aktif" selected>Aktif</option>
+                        <option value="Lulus">Lulus</option>
+                        <option value="Cuti">Cuti</option>
+                    </select>
+                </div>
+                <div class="modal-actions">
+                    <a href="#" class="btn btn-cancel">Batal</a>
+                    <a href="#" class="btn btn-save">Simpan Perubahan</a>
+                </div>
+            </form>
+        </div>
+    </div>
+
+    <!-- Modal Hapus Data -->
+    <div id="deleteModal" class="modal-overlay">
+        <div class="modal-card modal-small">
+            <div class="modal-header">
+                <h3 style="color: #ef4444;"><i class="fa-solid fa-triangle-exclamation"></i> Konfirmasi Hapus</h3>
+                <a href="#" class="close-modal"><i class="fa-solid fa-xmark"></i></a>
+            </div>
+            <div class="modal-body">
+                <p>Apakah Anda yakin ingin menghapus data mahasiswa ini? Tindakan ini tidak dapat dibatalkan.</p>
+            </div>
+            <div class="modal-actions">
+                <a href="#" class="btn btn-cancel">Batal</a>
+                <a href="#" class="btn btn-delete-confirm">Ya, Hapus Data</a>
+            </div>
+        </div>
+    </div>
+
+</body>
+</html>

@@ -1,0 +1,17 @@
+body {
+    background-color: #f4f4f4;
+    font-family: Arial, sans-serif;
+}
+
+.hero-box {
+    background-color: #e9ecef;
+}
+
+.section-box {
+    padding: 40px 0;
+}
+
+.nav-link.active {
+    font-weight: bold;
+    text-decoration: underline;
+}

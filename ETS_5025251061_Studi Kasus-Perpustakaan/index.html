@@ -3,23 +3,28 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>LibraryReg - Pendaftaran Anggota Perpustakaan</title>
+    <title>LibraryReg — Aplikasi Pendaftaran Anggota Perpustakaan</title>
     <!-- Bootstrap 5 CSS -->
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
+    <!-- Bootstrap Icons -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.1/font/bootstrap-icons.css" rel="stylesheet">
     <!-- Custom CSS -->
     <link rel="stylesheet" href="style.css">
 </head>
 <body>
 
-    <!-- B. MENU NAVIGASI -->
-    <nav class="navbar navbar-expand-lg navbar-dark bg-primary sticky-top" id="mainNavbar">
+    <!-- B. PENGELOLAAN MENU NAVIGASI (Navbar Responsif Bootstrap) -->
+    <nav class="navbar navbar-expand-lg navbar-light bg-white shadow-sm sticky-top" id="mainNavbar">
         <div class="container">
-            <a class="navbar-brand fw-bold" href="#beranda">LibraryReg</a>
+            <a class="navbar-brand fw-bold text-primary d-flex align-items-center gap-2" href="#beranda">
+                <i class="bi bi-book-half fs-3"></i>
+                <span>LibraryReg</span>
+            </a>
             <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
                 <span class="navbar-toggler-icon"></span>
             </button>
             <div class="collapse navbar-collapse" id="navbarNav">
-                <ul class="navbar-nav ms-auto">
+                <ul class="navbar-nav ms-auto align-items-lg-center gap-1">
                     <li class="nav-item">
                         <a class="nav-link active" href="#beranda">Beranda</a>
                     </li>
@@ -35,9 +40,9 @@
                     <li class="nav-item">
                         <a class="nav-link" href="#daftar-anggota">Daftar Anggota</a>
                     </li>
-                    <li class="nav-item ms-lg-2">
-                        <button class="btn btn-light btn-sm mt-1 mt-lg-0" data-bs-toggle="modal" data-bs-target="#loginModal" id="btnAuthPetugas">
-                            <span id="authStatusText">Login Petugas</span>
+                    <li class="nav-item ms-lg-2 mt-2 mt-lg-0">
+                        <button class="btn btn-outline-primary btn-sm px-3" id="btnAuthPetugas" data-bs-toggle="modal" data-bs-target="#loginModal">
+                            <i class="bi bi-person-lock me-1"></i> <span id="authStatusText">Login Petugas</span>
                         </button>
                     </li>
                 </ul>
@@ -45,83 +50,70 @@
         </div>
     </nav>
 
-    <!-- NOTIFIKASI ALERT SEDERHANA -->
-    <div class="container mt-3">
-        <div id="alertBox" class="alert d-none" role="alert"></div>
+    <!-- AREA NOTIFIKASI GLOBAL (Toast Bootstrap) -->
+    <div class="toast-container-custom position-fixed top-0 end-0 p-3">
+        <div id="liveToast" class="toast align-items-center text-bg-success border-0" role="alert" aria-live="assertive" aria-atomic="true">
+            <div class="d-flex">
+                <div class="toast-body" id="toastMessage">
+                    Operasi berhasil dilakukan!
+                </div>
+                <button type="button" class="btn-close btn-close-white me-2 m-auto" data-bs-dismiss="toast"></button>
+            </div>
+        </div>
     </div>
 
     <!-- A. LANDING PAGE: HERO SECTION -->
-    <section id="beranda" class="hero-box py-5 border-bottom">
-        <div class="container text-center">
-            <h1 class="fw-bold mb-3">Selamat Datang di LibraryReg</h1>
-            <p class="lead mb-4">
-                Aplikasi Pendaftaran Anggota Perpustakaan Perguruan Tinggi Secara Online.
-                Memudahkan mahasiswa, dosen, dan tenaga kependidikan mendaftar tanpa formulir kertas.
-            </p>
-            <a href="#pendaftaran" class="btn btn-primary me-2">Daftar Anggota Baru</a>
-            <a href="#daftar-anggota" class="btn btn-outline-secondary">Lihat Daftar Anggota</a>
-        </div>
-    </section>
-
-    <!-- STATISTIK KOLEKSI & ANGGOTA -->
-    <section class="py-4 bg-white border-bottom">
+    <section id="beranda" class="hero-section">
         <div class="container">
-            <div class="row text-center g-3">
-                <div class="col-6 col-md-3">
-                    <div class="border p-3">
-                        <h4 class="fw-bold mb-0">15.000+</h4>
-                        <small class="text-muted">Koleksi Buku</small>
+            <div class="row align-items-center g-5">
+                <div class="col-lg-7">
+                    <span class="badge bg-warning text-dark mb-3 px-3 py-2 fw-semibold">Sistem Pendaftaran Digital Kampus</span>
+                    <h1 class="display-5 fw-bold mb-3">Daftar Anggota Perpustakaan Tanpa Antre &amp; Tanpa Kertas</h1>
+                    <p class="lead mb-4 opacity-90">
+                        LibraryReg memudahkan mahasiswa, dosen, dan tenaga kependidikan untuk mendaftar keanggotaan perpustakaan perguruan tinggi secara online, cepat, dan terintegrasi.
+                    </p>
+                    <div class="d-flex flex-wrap gap-3">
+                        <a href="#pendaftaran" class="btn btn-warning btn-lg fw-semibold px-4 shadow-sm">
+                            <i class="bi bi-person-plus-fill me-2"></i>Daftar Sekarang
+                        </a>
+                        <a href="#daftar-anggota" class="btn btn-outline-light btn-lg px-4">
+                            <i class="bi bi-table me-2"></i>Lihat Data Anggota
+                        </a>
                     </div>
                 </div>
-                <div class="col-6 col-md-3">
-                    <div class="border p-3">
-                        <h4 class="fw-bold mb-0" id="statTotalAnggota">0</h4>
-                        <small class="text-muted">Anggota Terdaftar</small>
-                    </div>
-                </div>
-                <div class="col-6 col-md-3">
-                    <div class="border p-3">
-                        <h4 class="fw-bold mb-0">3.500+</h4>
-                        <small class="text-muted">Jurnal &amp; E-Book</small>
-                    </div>
-                </div>
-                <div class="col-6 col-md-3">
-                    <div class="border p-3">
-                        <h4 class="fw-bold mb-0">10 Ruang</h4>
-                        <small class="text-muted">Ruang Baca</small>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </section>
-
-    <!-- TENTANG & KEUNGGULAN PERPUSTAKAAN -->
-    <section id="tentang" class="section-box">
-        <div class="container">
-            <h3 class="mb-3">Tentang &amp; Fasilitas Perpustakaan</h3>
-            <p class="text-muted">Perpustakaan kampus menyediakan berbagai fasilitas untuk menunjang kegiatan belajar dan penelitian mahasiswa serta dosen.</p>
-            <div class="row g-3 mt-2">
-                <div class="col-md-4">
-                    <div class="card h-100">
-                        <div class="card-body">
-                            <h5 class="card-title">Ruang Baca Ber-AC &amp; Wi-Fi</h5>
-                            <p class="card-text">Tersedia ruang baca yang nyaman dilengkapi akses internet gratis bagi seluruh pengunjung.</p>
+                <div class="col-lg-5 text-center">
+                    <div class="bg-white text-dark p-4 rounded-4 shadow-lg text-start">
+                        <div class="d-flex align-items-center gap-3 mb-3 border-bottom pb-3">
+                            <div class="hero-card-avatar bg-primary text-white rounded-circle d-flex align-items-center justify-content-center">
+                                <i class="bi bi-person-vcard fs-4"></i>
+                            </div>
+                            <div>
+                                <h6 class="mb-0 fw-bold">Kartu Anggota Digital</h6>
+                                <small class="text-muted">Perpustakaan Perguruan Tinggi</small>
+                            </div>
                         </div>
-                    </div>
-                </div>
-                <div class="col-md-4">
-                    <div class="card h-100">
-                        <div class="card-body">
-                            <h5 class="card-title">Pendaftaran &amp; Katalog Online</h5>
-                            <p class="card-text">Pendaftaran anggota dan pencarian buku dilakukan secara digital tanpa perlu mengantre lama.</p>
-                        </div>
-                    </div>
-                </div>
-                <div class="col-md-4">
-                    <div class="card h-100">
-                        <div class="card-body">
-                            <h5 class="card-title">Koleksi Tugas Akhir &amp; Jurnal</h5>
-                            <p class="card-text">Menyediakan koleksi referensi kuliah, skripsi, tesis, dan jurnal ilmiah terakreditasi.</p>
+                        <p class="small text-secondary mb-3">
+                            Hindari kesalahan pencatatan manual dan keterlambatan pembuatan kartu. Data Anda langsung tersimpan dan siap diverifikasi petugas.
+                        </p>
+                        <div class="row text-center g-2">
+                            <div class="col-4">
+                                <div class="p-2 bg-light rounded">
+                                    <div class="fw-bold text-primary">100%</div>
+                                    <small class="text-muted mini-label">Paperless</small>
+                                </div>
+                            </div>
+                            <div class="col-4">
+                                <div class="p-2 bg-light rounded">
+                                    <div class="fw-bold text-primary">&lt; 1 Menit</div>
+                                    <small class="text-muted mini-label">Registrasi</small>
+                                </div>
+                            </div>
+                            <div class="col-4">
+                                <div class="p-2 bg-light rounded">
+                                    <div class="fw-bold text-primary">24/7</div>
+                                    <small class="text-muted mini-label">Akses Online</small>
+                                </div>
+                            </div>
                         </div>
                     </div>
                 </div>
@@ -129,33 +121,125 @@
         </div>
     </section>
 
-    <!-- LAYANAN PERPUSTAKAAN -->
-    <section id="layanan" class="section-box bg-white border-top border-bottom">
+    <!-- STATISTIK ILUSTRATIF JUMLAH KOLEKSI & ANGGOTA -->
+    <section class="py-5 bg-white border-bottom">
         <div class="container">
-            <h3 class="mb-3">Layanan Perpustakaan</h3>
-            <div class="row g-3">
-                <div class="col-md-6">
-                    <div class="p-3 border">
-                        <h5>1. Layanan Peminjaman &amp; Pengembalian</h5>
-                        <p class="mb-0 text-muted">Anggota yang sudah terdaftar dapat meminjam koleksi buku cetak hingga batas waktu 2 minggu.</p>
+            <div class="row g-4 text-center">
+                <div class="col-6 col-md-3">
+                    <div class="p-3 stat-card bg-light">
+                        <i class="bi bi-journal-bookmark-fill text-primary fs-2"></i>
+                        <h3 class="fw-bold mt-2 mb-0">45.200+</h3>
+                        <p class="text-muted small mb-0">Koleksi Buku Cetak</p>
                     </div>
                 </div>
-                <div class="col-md-6">
-                    <div class="p-3 border">
-                        <h5>2. Layanan Referensi &amp; Jurnal</h5>
-                        <p class="mb-0 text-muted">Bantuan pencarian literatur penelitian, tugas akhir, dan akses ke portal e-journal kampus.</p>
+                <div class="col-6 col-md-3">
+                    <div class="p-3 stat-card bg-light">
+                        <i class="bi bi-people-fill text-success fs-2"></i>
+                        <h3 class="fw-bold mt-2 mb-0" id="statTotalAnggota">0</h3>
+                        <p class="text-muted small mb-0">Anggota Terdaftar</p>
                     </div>
                 </div>
-                <div class="col-md-6">
-                    <div class="p-3 border">
-                        <h5>3. Layanan Ruang Diskusi</h5>
-                        <p class="mb-0 text-muted">Peminjaman ruangan khusus untuk belajar kelompok atau diskusi akademik mahasiswa.</p>
+                <div class="col-6 col-md-3">
+                    <div class="p-3 stat-card bg-light">
+                        <i class="bi bi-laptop text-warning fs-2"></i>
+                        <h3 class="fw-bold mt-2 mb-0">12.500+</h3>
+                        <p class="text-muted small mb-0">E-Book &amp; E-Journal</p>
                     </div>
                 </div>
-                <div class="col-md-6">
-                    <div class="p-3 border">
-                        <h5>4. Pembuatan Kartu Anggota</h5>
-                        <p class="mb-0 text-muted">Pendaftaran anggota secara mandiri melalui formulir web yang langsung terdata oleh petugas.</p>
+                <div class="col-6 col-md-3">
+                    <div class="p-3 stat-card bg-light">
+                        <i class="bi bi-building-check text-info fs-2"></i>
+                        <h3 class="fw-bold mt-2 mb-0">18 Ruang</h3>
+                        <p class="text-muted small mb-0">Area Baca &amp; Diskusi</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- KEUNGGULAN & FASILITAS PERPUSTAKAAN (TENTANG) -->
+    <section id="tentang" class="section-padding">
+        <div class="container">
+            <div class="text-center mx-auto mb-5">
+                <h6 class="text-primary fw-bold text-uppercase">Tentang Perpustakaan</h6>
+                <h2 class="fw-bold">Keunggulan &amp; Fasilitas Modern</h2>
+                <p class="text-muted">Mendukung kegiatan akademik, riset, dan literasi civitas akademika dengan fasilitas lengkap.</p>
+            </div>
+            <div class="row g-4">
+                <div class="col-md-4">
+                    <div class="card h-100 border-0 shadow-sm p-4">
+                        <div class="feature-icon bg-primary bg-opacity-10 text-primary">
+                            <i class="bi bi-wifi"></i>
+                        </div>
+                        <h5 class="fw-bold">Co-Working &amp; High-Speed Wi-Fi</h5>
+                        <p class="text-muted mb-0">Ruang belajar ber-AC yang tenang dilengkapi koneksi internet cepat dan stopkontak di setiap meja.</p>
+                    </div>
+                </div>
+                <div class="col-md-4">
+                    <div class="card h-100 border-0 shadow-sm p-4">
+                        <div class="feature-icon bg-success bg-opacity-10 text-success">
+                            <i class="bi bi-search"></i>
+                        </div>
+                        <h5 class="fw-bold">Katalog &amp; Keanggotaan Digital</h5>
+                        <p class="text-muted mb-0">Pencarian buku dan pengelolaan data anggota terpusat tanpa kendala formulir kertas manual.</p>
+                    </div>
+                </div>
+                <div class="col-md-4">
+                    <div class="card h-100 border-0 shadow-sm p-4">
+                        <div class="feature-icon bg-warning bg-opacity-10 text-warning">
+                            <i class="bi bi-collection"></i>
+                        </div>
+                        <h5 class="fw-bold">Repositori Akademik Lengkap</h5>
+                        <p class="text-muted mb-0">Akses penuh ke koleksi tugas akhir, tesis, jurnal ilmiah nasional maupun internasional.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- INFORMASI LAYANAN PERPUSTAKAAN -->
+    <section id="layanan" class="section-padding bg-white border-top border-bottom">
+        <div class="container">
+            <div class="text-center mb-5">
+                <h6 class="text-primary fw-bold text-uppercase">Layanan Kami</h6>
+                <h2 class="fw-bold">Layanan Utama Perpustakaan</h2>
+                <p class="text-muted">Berbagai layanan yang dapat diakses setelah Anda terdaftar sebagai anggota resmi.</p>
+            </div>
+            <div class="row g-4">
+                <div class="col-md-6 col-lg-3">
+                    <div class="card h-100 border shadow-sm">
+                        <div class="card-body">
+                            <i class="bi bi-arrow-left-right text-primary fs-3 mb-2 d-block"></i>
+                            <h5 class="card-title fw-bold">Sirkulasi Koleksi</h5>
+                            <p class="card-text text-muted small">Layanan peminjaman, perpanjangan masa pinjam, dan pengembalian buku teks secara mandiri.</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-6 col-lg-3">
+                    <div class="card h-100 border shadow-sm">
+                        <div class="card-body">
+                            <i class="bi bi-journal-richtext text-primary fs-3 mb-2 d-block"></i>
+                            <h5 class="card-title fw-bold">Layanan Referensi</h5>
+                            <p class="card-text text-muted small">Pendampingan pencarian literatur riset, ensiklopedia, dan panduan sitasi karya ilmiah.</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-6 col-lg-3">
+                    <div class="card h-100 border shadow-sm">
+                        <div class="card-body">
+                            <i class="bi bi-cloud-arrow-down text-primary fs-3 mb-2 d-block"></i>
+                            <h5 class="card-title fw-bold">Layanan Literasi Digital</h5>
+                            <p class="card-text text-muted small">Akses ke pangkalan data e-journal, e-book, dan pengecekan kemiripan dokumen akademik.</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-6 col-lg-3">
+                    <div class="card h-100 border shadow-sm">
+                        <div class="card-body">
+                            <i class="bi bi-door-open text-primary fs-3 mb-2 d-block"></i>
+                            <h5 class="card-title fw-bold">Reservasi Ruang Diskusi</h5>
+                            <p class="card-text text-muted small">Pemesanan ruang diskusi kelompok dilengkapi layar presentasi bagi anggota aktif.</p>
+                        </div>
                     </div>
                 </div>
             </div>
@@ -163,250 +247,345 @@
     </section>
 
     <!-- C. FORMULIR PENDAFTARAN ANGGOTA -->
-    <section id="pendaftaran" class="section-box">
+    <section id="pendaftaran" class="section-padding">
         <div class="container">
-            <div class="card">
-                <div class="card-header bg-secondary text-white">
-                    <h4 class="mb-0">Formulir Pendaftaran Anggota</h4>
-                </div>
-                <div class="card-body">
-                    <form id="formPendaftaran" novalidate>
-                        <div class="row g-3">
-                            <div class="col-md-6">
-                                <label for="regNama" class="form-label">Nama Lengkap *</label>
-                                <input type="text" class="form-control" id="regNama" required>
-                                <div class="invalid-feedback">Nama lengkap wajib diisi.</div>
-                            </div>
-                            <div class="col-md-6">
-                                <label for="regNomorInduk" class="form-label">NIM / NIP *</label>
-                                <input type="text" class="form-control" id="regNomorInduk" required>
-                                <div class="invalid-feedback" id="feedbackNomorInduk">NIM/NIP wajib diisi dan harus unik.</div>
-                            </div>
-                            <div class="col-md-6">
-                                <label for="regProdi" class="form-label">Program Studi *</label>
-                                <input type="text" class="form-control" id="regProdi" required>
-                                <div class="invalid-feedback">Program studi wajib diisi.</div>
-                            </div>
-                            <div class="col-md-6">
-                                <label for="regJenis" class="form-label">Jenis Keanggotaan *</label>
-                                <select class="form-select" id="regJenis" required>
-                                    <option value="">-- Pilih Jenis --</option>
-                                    <option value="Mahasiswa">Mahasiswa</option>
-                                    <option value="Dosen">Dosen</option>
-                                    <option value="Tenaga Kependidikan">Tenaga Kependidikan</option>
-                                </select>
-                                <div class="invalid-feedback">Pilih jenis keanggotaan.</div>
-                            </div>
-                            <div class="col-md-6">
-                                <label for="regTelepon" class="form-label">Nomor Telepon *</label>
-                                <input type="text" class="form-control" id="regTelepon" required>
-                                <div class="invalid-feedback">Nomor telepon wajib diisi.</div>
-                            </div>
-                            <div class="col-md-6">
-                                <label for="regEmail" class="form-label">Email *</label>
-                                <input type="email" class="form-control" id="regEmail" required>
-                                <div class="invalid-feedback">Format email tidak valid.</div>
-                            </div>
-                            <div class="col-12">
-                                <label for="regAlamat" class="form-label">Alamat *</label>
-                                <textarea class="form-control" id="regAlamat" rows="2" required></textarea>
-                                <div class="invalid-feedback">Alamat wajib diisi.</div>
-                            </div>
-                            <div class="col-12">
-                                <button type="submit" class="btn btn-primary">Simpan Pendaftaran</button>
-                                <button type="reset" class="btn btn-secondary">Reset</button>
-                            </div>
+            <div class="row justify-content-center">
+                <div class="col-lg-8">
+                    <div class="card border-0 shadow">
+                        <div class="card-header bg-primary text-white p-4">
+                            <h4 class="mb-1 fw-bold"><i class="bi bi-person-plus me-2"></i>Formulir Pendaftaran Anggota Baru</h4>
+                            <p class="mb-0 small opacity-75">Lengkapi seluruh data di bawah ini dengan benar untuk mendapatkan keanggotaan LibraryReg.</p>
                         </div>
-                    </form>
+                        <div class="card-body p-4">
+                            <form id="formPendaftaran" novalidate>
+                                <div class="row g-3">
+                                    <!-- Nama Lengkap -->
+                                    <div class="col-md-6">
+                                        <label for="regNama" class="form-label fw-semibold">Nama Lengkap <span class="text-danger">*</span></label>
+                                        <input type="text" class="form-control" id="regNama" placeholder="Contoh: Budi Santoso" required>
+                                        <div class="invalid-feedback">Nama lengkap wajib diisi.</div>
+                                    </div>
+
+                                    <!-- NIM / NIP -->
+                                    <div class="col-md-6">
+                                        <label for="regNomorInduk" class="form-label fw-semibold">NIM / NIP <span class="text-danger">*</span></label>
+                                        <input type="text" class="form-control" id="regNomorInduk" placeholder="Masukkan NIM atau NIP unik" required>
+                                        <div class="invalid-feedback" id="feedbackNomorInduk">NIM/NIP wajib diisi dan belum pernah terdaftar.</div>
+                                    </div>
+
+                                    <!-- Jenis Keanggotaan -->
+                                    <div class="col-md-6">
+                                        <label for="regJenis" class="form-label fw-semibold">Jenis Keanggotaan <span class="text-danger">*</span></label>
+                                        <select class="form-select" id="regJenis" required>
+                                            <option value="">-- Pilih Jenis Keanggotaan --</option>
+                                            <option value="Mahasiswa">Mahasiswa</option>
+                                            <option value="Dosen">Dosen</option>
+                                            <option value="Tenaga Kependidikan">Tenaga Kependidikan</option>
+                                        </select>
+                                        <div class="invalid-feedback">Pilih salah satu jenis keanggotaan.</div>
+                                    </div>
+
+                                    <!-- Program Studi -->
+                                    <div class="col-md-6">
+                                        <label for="regProdi" class="form-label fw-semibold">Program Studi / Unit <span class="text-danger">*</span></label>
+                                        <input type="text" class="form-control" id="regProdi" placeholder="Contoh: Teknik Informatika" required>
+                                        <div class="invalid-feedback">Program studi wajib diisi.</div>
+                                    </div>
+
+                                    <!-- Nomor Telepon -->
+                                    <div class="col-md-6">
+                                        <label for="regTelepon" class="form-label fw-semibold">Nomor Telepon <span class="text-danger">*</span></label>
+                                        <input type="tel" class="form-control" id="regTelepon" placeholder="Contoh: 081234567890" required>
+                                        <div class="invalid-feedback">Nomor telepon wajib diisi (hanya angka, min 10 digit).</div>
+                                    </div>
+
+                                    <!-- Email -->
+                                    <div class="col-md-6">
+                                        <label for="regEmail" class="form-label fw-semibold">Email <span class="text-danger">*</span></label>
+                                        <input type="email" class="form-control" id="regEmail" placeholder="nama@kampus.ac.id" required>
+                                        <div class="invalid-feedback">Masukkan format alamat email yang valid.</div>
+                                    </div>
+
+                                    <!-- Alamat -->
+                                    <div class="col-12">
+                                        <label for="regAlamat" class="form-label fw-semibold">Alamat Lengkap <span class="text-danger">*</span></label>
+                                        <textarea class="form-control" id="regAlamat" rows="2" placeholder="Masukkan alamat domisili saat ini" required></textarea>
+                                        <div class="invalid-feedback">Alamat lengkap wajib diisi.</div>
+                                    </div>
+
+                                    <div class="col-12 mt-4 d-flex justify-content-end gap-2">
+                                        <button type="reset" class="btn btn-light border">Reset Form</button>
+                                        <button type="submit" class="btn btn-primary px-4 fw-semibold">
+                                            <i class="bi bi-check2-circle me-1"></i>Daftarkan Anggota
+                                        </button>
+                                    </div>
+                                </div>
+                            </form>
+                        </div>
+                    </div>
                 </div>
             </div>
         </div>
     </section>
 
     <!-- D. HALAMAN PENGELOLAAN ANGGOTA -->
-    <section id="daftar-anggota" class="section-box bg-white border-top">
+    <section id="daftar-anggota" class="section-padding bg-white border-top">
         <div class="container">
-            <div class="d-flex justify-content-between align-items-center mb-3">
-                <h3 class="mb-0">Daftar Anggota Perpustakaan</h3>
-                <span class="badge bg-secondary" id="badgeModePetugas">Status: Pengunjung</span>
-            </div>
-
-            <!-- Pencarian -->
-            <div class="row g-2 mb-3">
-                <div class="col-md-8">
-                    <input type="text" id="searchInput" class="form-control" placeholder="Cari berdasarkan Nama atau NIM/NIP...">
+            <div class="d-flex flex-column flex-md-row justify-content-between align-items-md-center mb-4 gap-3">
+                <div>
+                    <h6 class="text-primary fw-bold text-uppercase mb-1">Manajemen Data</h6>
+                    <h2 class="fw-bold mb-0">Daftar &amp; Pengelolaan Anggota</h2>
                 </div>
-                <div class="col-md-4">
-                    <select id="filterJenis" class="form-select">
-                        <option value="">Semua Jenis Keanggotaan</option>
-                        <option value="Mahasiswa">Mahasiswa</option>
-                        <option value="Dosen">Dosen</option>
-                        <option value="Tenaga Kependidikan">Tenaga Kependidikan</option>
-                    </select>
+                <div class="d-flex align-items-center gap-2">
+                    <span class="badge bg-secondary py-2 px-3" id="badgeModePetugas">
+                        <i class="bi bi-shield-check me-1"></i>Mode: Publik / Petugas Aktif
+                    </span>
                 </div>
             </div>
 
-            <!-- Tabel Data Anggota -->
-            <div class="table-responsive">
-                <table class="table table-bordered table-striped align-middle">
-                    <thead class="table-dark">
-                        <tr>
-                            <th>No</th>
-                            <th>NIM/NIP</th>
-                            <th>Nama Lengkap</th>
-                            <th>Program Studi</th>
-                            <th>Jenis Keanggotaan</th>
-                            <th>Email</th>
-                            <th>Aksi</th>
-                        </tr>
-                    </thead>
-                    <tbody id="tabelAnggotaBody">
-                        <!-- Diisi oleh script.js -->
-                    </tbody>
-                </table>
+            <!-- Bar Pencarian & Filter -->
+            <div class="card border-0 shadow-sm mb-4 bg-light">
+                <div class="card-body">
+                    <div class="row g-3 align-items-center">
+                        <div class="col-md-8">
+                            <div class="input-group">
+                                <span class="input-group-text bg-white"><i class="bi bi-search text-muted"></i></span>
+                                <input type="text" id="searchInput" class="form-control" placeholder="Cari anggota berdasarkan Nama atau NIM/NIP...">
+                            </div>
+                        </div>
+                        <div class="col-md-4">
+                            <select id="filterJenis" class="form-select">
+                                <option value="">Semua Jenis Keanggotaan</option>
+                                <option value="Mahasiswa">Mahasiswa</option>
+                                <option value="Dosen">Dosen</option>
+                                <option value="Tenaga Kependidikan">Tenaga Kependidikan</option>
+                            </select>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Tabel Daftar Anggota -->
+            <div class="card border-0 shadow-sm">
+                <div class="card-body p-0">
+                    <div class="table-responsive">
+                        <table class="table table-hover align-middle mb-0">
+                            <thead class="table-light">
+                                <tr>
+                                    <th class="ps-4">No</th>
+                                    <th>NIM / NIP</th>
+                                    <th>Nama Lengkap</th>
+                                    <th>Program Studi</th>
+                                    <th>Jenis Keanggotaan</th>
+                                    <th>Email</th>
+                                    <th class="text-center pe-4">Aksi Petugas</th>
+                                </tr>
+                            </thead>
+                            <tbody id="tabelAnggotaBody">
+                                <!-- Diisi secara dinamis melalui script.js -->
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
             </div>
         </div>
     </section>
 
-    <!-- FOOTER -->
-    <footer class="bg-dark text-white py-4 mt-4">
+    <!-- FOOTER BERISI KONTAK DAN INFORMASI JAM LAYANAN -->
+    <footer class="bg-dark text-light pt-5 pb-4">
         <div class="container">
-            <div class="row">
-                <div class="col-md-6">
-                    <h5>LibraryReg - Perpustakaan Kampus</h5>
-                    <p class="small mb-1">Alamat: Gedung Perpustakaan Pusat, Kampus Perguruan Tinggi</p>
-                    <p class="small mb-0">Kontak: (031) 5994251 | Email: perpustakaan@kampus.ac.id</p>
+            <div class="row g-4">
+                <div class="col-lg-5">
+                    <h5 class="fw-bold text-white d-flex align-items-center gap-2 mb-3">
+                        <i class="bi bi-book-half text-primary"></i> LibraryReg
+                    </h5>
+                    <p class="text-secondary small">
+                        Aplikasi Pendaftaran Anggota Perpustakaan Perguruan Tinggi. Solusi modern untuk pelayanan sirkulasi, literasi, dan manajemen keanggotaan yang cepat serta akurat.
+                    </p>
                 </div>
-                <div class="col-md-6 text-md-end mt-3 mt-md-0">
-                    <h6>Jam Layanan:</h6>
-                    <p class="small mb-1">Senin - Jumat: 08.00 - 16.00 WIB</p>
-                    <p class="small mb-0">Sabtu - Minggu: Tutup</p>
+                <div class="col-lg-4">
+                    <h6 class="fw-bold text-white mb-3">Jam Layanan Perpustakaan</h6>
+                    <ul class="list-unstyled text-secondary small mb-0">
+                        <li class="mb-2"><i class="bi bi-clock me-2 text-primary"></i>Senin – Kamis: 08.00 – 20.00 WIB</li>
+                        <li class="mb-2"><i class="bi bi-clock me-2 text-primary"></i>Jumat: 08.00 – 19.00 WIB</li>
+                        <li class="mb-2"><i class="bi bi-clock me-2 text-primary"></i>Sabtu: 08.00 – 14.00 WIB</li>
+                        <li><i class="bi bi-x-circle me-2 text-danger"></i>Minggu &amp; Hari Libur Nasional: Tutup</li>
+                    </ul>
                 </div>
+                <div class="col-lg-3">
+                    <h6 class="fw-bold text-white mb-3">Kontak Kami</h6>
+                    <ul class="list-unstyled text-secondary small mb-0">
+                        <li class="mb-2"><i class="bi bi-geo-alt me-2 text-primary"></i>Gedung Perpustakaan Pusat Lt. 1, Kampus Utama</li>
+                        <li class="mb-2"><i class="bi bi-telephone me-2 text-primary"></i>(031) 599-4251</li>
+                        <li><i class="bi bi-envelope me-2 text-primary"></i>library@kampus.ac.id</li>
+                    </ul>
+                </div>
+            </div>
+            <hr class="border-secondary my-4">
+            <div class="text-center text-secondary small">
+                &copy; 2026 LibraryReg — Sistem Informasi Perpustakaan Perguruan Tinggi.
             </div>
         </div>
     </footer>
 
-    <!-- MODAL DETAIL ANGGOTA -->
-    <div class="modal fade" id="detailModal" tabindex="-1">
-        <div class="modal-dialog">
-            <div class="modal-content">
-                <div class="modal-header">
-                    <h5 class="modal-title">Detail Anggota</h5>
-                    <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+    <!-- MODAL 1: LIHAT DETAIL ANGGOTA -->
+    <div class="modal fade" id="detailModal" tabindex="-1" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered">
+            <div class="modal-content border-0 shadow">
+                <div class="modal-header bg-primary text-white">
+                    <h5 class="modal-title fw-bold"><i class="bi bi-person-badge me-2"></i>Detail Data Anggota</h5>
+                    <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal"></button>
                 </div>
-                <div class="modal-body">
-                    <p><strong>Nama Lengkap:</strong> <span id="detNama"></span></p>
-                    <p><strong>NIM/NIP:</strong> <span id="detNomorInduk"></span></p>
-                    <p><strong>Program Studi:</strong> <span id="detProdi"></span></p>
-                    <p><strong>Jenis Keanggotaan:</strong> <span id="detJenis"></span></p>
-                    <p><strong>Nomor Telepon:</strong> <span id="detTelepon"></span></p>
-                    <p><strong>Email:</strong> <span id="detEmail"></span></p>
-                    <p class="mb-0"><strong>Alamat:</strong> <span id="detAlamat"></span></p>
+                <div class="modal-body p-4">
+                    <table class="table table-borderless mb-0">
+                        <tbody>
+                            <tr>
+                                <th class="text-muted">Nama Lengkap</th>
+                                <td class="fw-bold" id="detNama">-</td>
+                            </tr>
+                            <tr>
+                                <th class="text-muted">NIM / NIP</th>
+                                <td id="detNomorInduk">-</td>
+                            </tr>
+                            <tr>
+                                <th class="text-muted">Jenis Keanggotaan</th>
+                                <td><span class="badge bg-primary" id="detJenis">-</span></td>
+                            </tr>
+                            <tr>
+                                <th class="text-muted">Program Studi</th>
+                                <td id="detProdi">-</td>
+                            </tr>
+                            <tr>
+                                <th class="text-muted">Nomor Telepon</th>
+                                <td id="detTelepon">-</td>
+                            </tr>
+                            <tr>
+                                <th class="text-muted">Email</th>
+                                <td id="detEmail">-</td>
+                            </tr>
+                            <tr>
+                                <th class="text-muted">Alamat</th>
+                                <td id="detAlamat">-</td>
+                            </tr>
+                        </tbody>
+                    </table>
                 </div>
-                <div class="modal-footer">
+                <div class="modal-footer bg-light">
                     <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Tutup</button>
                 </div>
             </div>
         </div>
     </div>
 
-    <!-- MODAL EDIT ANGGOTA -->
-    <div class="modal fade" id="editModal" tabindex="-1">
-        <div class="modal-dialog">
-            <div class="modal-content">
-                <div class="modal-header">
-                    <h5 class="modal-title">Edit Data Anggota</h5>
+    <!-- MODAL 2: EDIT DATA ANGGOTA -->
+    <div class="modal fade" id="editModal" tabindex="-1" aria-hidden="true">
+        <div class="modal-dialog modal-lg modal-dialog-centered">
+            <div class="modal-content border-0 shadow">
+                <div class="modal-header bg-warning text-dark">
+                    <h5 class="modal-title fw-bold"><i class="bi bi-pencil-square me-2"></i>Edit Data Anggota</h5>
                     <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
                 </div>
-                <div class="modal-body">
+                <div class="modal-body p-4">
                     <form id="formEditAnggota" novalidate>
                         <input type="hidden" id="editId">
-                        <div class="mb-2">
-                            <label class="form-label">Nama Lengkap</label>
-                            <input type="text" class="form-control" id="editNama" required>
+                        <div class="row g-3">
+                            <div class="col-md-6">
+                                <label class="form-label fw-semibold">Nama Lengkap</label>
+                                <input type="text" class="form-control" id="editNama" required>
+                                <div class="invalid-feedback">Nama wajib diisi.</div>
+                            </div>
+                            <div class="col-md-6">
+                                <label class="form-label fw-semibold">NIM / NIP</label>
+                                <input type="text" class="form-control" id="editNomorInduk" required>
+                                <div class="invalid-feedback" id="feedbackEditNomorInduk">NIM/NIP wajib diisi dan harus unik.</div>
+                            </div>
+                            <div class="col-md-6">
+                                <label class="form-label fw-semibold">Jenis Keanggotaan</label>
+                                <select class="form-select" id="editJenis" required>
+                                    <option value="Mahasiswa">Mahasiswa</option>
+                                    <option value="Dosen">Dosen</option>
+                                    <option value="Tenaga Kependidikan">Tenaga Kependidikan</option>
+                                </select>
+                            </div>
+                            <div class="col-md-6">
+                                <label class="form-label fw-semibold">Program Studi</label>
+                                <input type="text" class="form-control" id="editProdi" required>
+                                <div class="invalid-feedback">Program studi wajib diisi.</div>
+                            </div>
+                            <div class="col-md-6">
+                                <label class="form-label fw-semibold">Nomor Telepon</label>
+                                <input type="tel" class="form-control" id="editTelepon" required>
+                                <div class="invalid-feedback">Nomor telepon wajib diisi.</div>
+                            </div>
+                            <div class="col-md-6">
+                                <label class="form-label fw-semibold">Email</label>
+                                <input type="email" class="form-control" id="editEmail" required>
+                                <div class="invalid-feedback">Format email tidak valid.</div>
+                            </div>
+                            <div class="col-12">
+                                <label class="form-label fw-semibold">Alamat Lengkap</label>
+                                <textarea class="form-control" id="editAlamat" rows="2" required></textarea>
+                                <div class="invalid-feedback">Alamat wajib diisi.</div>
+                            </div>
                         </div>
-                        <div class="mb-2">
-                            <label class="form-label">NIM / NIP</label>
-                            <input type="text" class="form-control" id="editNomorInduk" required>
+                        <div class="mt-4 text-end">
+                            <button type="button" class="btn btn-light border me-2" data-bs-dismiss="modal">Batal</button>
+                            <button type="submit" class="btn btn-warning fw-semibold">Simpan Perubahan</button>
                         </div>
-                        <div class="mb-2">
-                            <label class="form-label">Program Studi</label>
-                            <input type="text" class="form-control" id="editProdi" required>
-                        </div>
-                        <div class="mb-2">
-                            <label class="form-label">Jenis Keanggotaan</label>
-                            <select class="form-select" id="editJenis" required>
-                                <option value="Mahasiswa">Mahasiswa</option>
-                                <option value="Dosen">Dosen</option>
-                                <option value="Tenaga Kependidikan">Tenaga Kependidikan</option>
-                            </select>
-                        </div>
-                        <div class="mb-2">
-                            <label class="form-label">Nomor Telepon</label>
-                            <input type="text" class="form-control" id="editTelepon" required>
-                        </div>
-                        <div class="mb-2">
-                            <label class="form-label">Email</label>
-                            <input type="email" class="form-control" id="editEmail" required>
-                        </div>
-                        <div class="mb-3">
-                            <label class="form-label">Alamat</label>
-                            <textarea class="form-control" id="editAlamat" rows="2" required></textarea>
-                        </div>
-                        <button type="submit" class="btn btn-primary">Simpan Perubahan</button>
                     </form>
                 </div>
             </div>
         </div>
     </div>
 
-    <!-- MODAL KONFIRMASI HAPUS -->
-    <div class="modal fade" id="deleteModal" tabindex="-1">
-        <div class="modal-dialog">
-            <div class="modal-content">
-                <div class="modal-header">
-                    <h5 class="modal-title">Konfirmasi Hapus</h5>
-                    <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+    <!-- MODAL 3: DIALOG KONFIRMASI HAPUS -->
+    <div class="modal fade" id="deleteModal" tabindex="-1" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered">
+            <div class="modal-content border-0 shadow">
+                <div class="modal-header bg-danger text-white">
+                    <h5 class="modal-title fw-bold"><i class="bi bi-exclamation-triangle me-2"></i>Konfirmasi Hapus Data</h5>
+                    <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal"></button>
                 </div>
-                <div class="modal-body">
-                    <p>Apakah Anda yakin ingin menghapus anggota <strong id="delNamaTarget"></strong> (<span id="delNimTarget"></span>)?</p>
+                <div class="modal-body p-4">
+                    <p class="mb-0">Apakah Anda yakin ingin menghapus data anggota <strong id="delNamaTarget"></strong> (<span id="delNimTarget"></span>)? Tindakan ini tidak dapat dibatalkan.</p>
                 </div>
-                <div class="modal-footer">
+                <div class="modal-footer bg-light">
                     <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Batal</button>
-                    <button type="button" class="btn btn-danger" id="btnConfirmDelete">Hapus</button>
+                    <button type="button" class="btn btn-danger fw-semibold" id="btnConfirmDelete">Ya, Hapus Data</button>
                 </div>
             </div>
         </div>
     </div>
 
-    <!-- MODAL LOGIN PETUGAS -->
-    <div class="modal fade" id="loginModal" tabindex="-1">
-        <div class="modal-dialog modal-sm">
-            <div class="modal-content">
-                <div class="modal-header">
-                    <h5 class="modal-title">Login Petugas</h5>
-                    <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+    <!-- MODAL 4: LOGIN PETUGAS (SIMULASI ANTARMUKA) -->
+    <div class="modal fade" id="loginModal" tabindex="-1" aria-hidden="true">
+        <div class="modal-dialog modal-sm modal-dialog-centered">
+            <div class="modal-content border-0 shadow">
+                <div class="modal-header bg-primary text-white">
+                    <h5 class="modal-title fw-bold"><i class="bi bi-shield-lock me-2"></i>Login Petugas</h5>
+                    <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal"></button>
                 </div>
-                <div class="modal-body">
+                <div class="modal-body p-4">
                     <form id="formLoginPetugas">
-                        <div class="mb-2">
-                            <label class="form-label">Username</label>
-                            <input type="text" class="form-control" id="loginUser" required>
+                        <div class="mb-3">
+                            <label class="form-label small fw-semibold">Username Petugas</label>
+                            <input type="text" class="form-control" id="loginUser" placeholder="admin" required>
                         </div>
                         <div class="mb-3">
-                            <label class="form-label">Password</label>
-                            <input type="password" class="form-control" id="loginPass" required>
+                            <label class="form-label small fw-semibold">Password</label>
+                            <input type="password" class="form-control" id="loginPass" placeholder="••••••" required>
                         </div>
-                        <button type="submit" class="btn btn-primary w-100">Login</button>
+                        <div class="form-text small mb-3">Simulasi: masukkan username &amp; password apa saja untuk masuk mode petugas.</div>
+                        <button type="submit" class="btn btn-primary w-100 fw-semibold">Masuk</button>
                     </form>
                 </div>
             </div>
         </div>
     </div>
 
-    <!-- Bootstrap JS -->
+    <!-- Bootstrap 5 JS Bundle -->
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
-    <!-- Script Utama -->
+    <!-- Custom JavaScript -->
     <script src="script.js"></script>
 </body>
 </html>

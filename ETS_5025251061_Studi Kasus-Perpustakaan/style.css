@@ -1,17 +1,66 @@
+html {
+    scroll-behavior: smooth;
+}
+
 body {
-    background-color: #f4f4f4;
-    font-family: Arial, sans-serif;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    background-color: #f8f9fa;
 }
 
-.hero-box {
-    background-color: #e9ecef;
-}
-
-.section-box {
-    padding: 40px 0;
-}
-
+/* Penanda Menu Aktif pada Navbar */
 .nav-link.active {
-    font-weight: bold;
-    text-decoration: underline;
+    font-weight: 600;
+    color: #0d6efd !important;
+    border-bottom: 2px solid #0d6efd;
+}
+
+/* Bagian Hero Landing Page */
+.hero-section {
+    background: linear-gradient(135deg, #0d6efd 0%, #0a429c 100%);
+    color: #ffffff;
+    padding: 80px 0;
+}
+
+.hero-card-avatar {
+    width: 50px;
+    height: 50px;
+}
+
+.mini-label {
+    font-size: 0.75rem;
+}
+
+/* Kartu Statistik */
+.stat-card {
+    border: none;
+    border-radius: 12px;
+    transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
+
+.stat-card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 6px 16px rgba(0, 0, 0, 0.08);
+}
+
+/* Ikon Keunggulan & Fasilitas */
+.feature-icon {
+    width: 56px;
+    height: 56px;
+    border-radius: 12px;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 1.5rem;
+    margin-bottom: 1rem;
+}
+
+/* Jarak Antar Section */
+.section-padding {
+    padding: 70px 0;
+}
+
+/* Posisi Toast Notifikasi */
+.toast-container-custom {
+    z-index: 1080;
+    margin-top: 60px;
 }
